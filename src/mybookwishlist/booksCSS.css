@@ -1,0 +1,52 @@
+
+/* 
+    Created on : 09 Jul 2015, 2:43:32 PM
+    Author     : johann
+*/
+.root{
+
+    -fx-background-image: url("book.jpg");
+    -fx-background-size: stretch;
+
+}
+.customText {
+    -fx-fill:#2962FF;
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+    -fx-text-alignment: justify;
+}
+
+.customAcquiredText {
+    -fx-fill:#390400;
+    -fx-font-size: 10pt;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+    -fx-text-alignment: justify;
+	
+}
+
+.customInputAcquiredText {
+    -fx-fill:#390400;
+    -fx-font-size: 7.5pt;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica";
+    -fx-text-alignment: justify;
+	
+	
+}
+
+.customButtonText {
+	-fx-font-family: "Helvetica";
+	-fx-background-color: #1e90ff;
+	-fx-font-size: 20;
+	-fx-alignment:center;
+}
+
+.customCloseButtonText {
+	-fx-font-family: "Helvetica";
+        -fx-background-color: #ff0033;
+	-fx-font-size: 20;
+	-fx-alignment:center;
+}
+
