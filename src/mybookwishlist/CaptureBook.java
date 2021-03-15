@@ -32,7 +32,14 @@ public class CaptureBook {
         if (addBook == true) {
             conUrl.Connect(addBook);
             try (Connection con = driver.getConnection(conUrl.connectionUrl)) { //driver needs string of db connection url
-                PreparedStatement pstmt = con.prepareStatement("SET NOCOUNT ON INSERT INTO books (Book_Name,Book_Author, Acquired,Date_Acquired,Date_Added) VALUES (?,?,?,?,GetDate())");
+                PreparedStatement pstmt = con.prepareStatement(
+                        "SET NOCOUNT ON INSERT "
+                                + "INTO books (Book_Name,"
+                                + "Book_Author,"
+                                + " Acquired,"
+                                + "Date_Acquired,"
+                                + "Date_Added)"
+                                + "VALUES (?,?,?,?,GetDate())");
                 pstmt.setString(1, bookName);
                 pstmt.setString(2, bookAuthor);
                 pstmt.setBoolean(3, acquired);
