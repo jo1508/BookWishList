@@ -5,6 +5,8 @@
  */
 package mybookwishlist;
 
+import bookwishlist.controller.CaptureBook;
+import bookwishlist.controller.ManageBooks;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -21,7 +23,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MyBookWishList extends Application {
-
+    
     Pane mainLayout = new Pane();
     Scene mainScene = new Scene(mainLayout, 800, 600);
     Pane secondLayout = new Pane();
