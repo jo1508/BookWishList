@@ -5,8 +5,8 @@
  */
 package mybookwishlist;
 
-import bookwishlist.controller.CaptureBook;
-import bookwishlist.controller.ManageBooks;
+import bookwishlist.model.Book;
+import bookwishlist.model.BookDAO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -28,12 +28,12 @@ public class MyBookWishList extends Application {
     Scene mainScene = new Scene(mainLayout, 800, 600);
     Pane secondLayout = new Pane();
     Scene secondScene = new Scene(secondLayout, 800, 600);
-
-    ManageBooks mb = new ManageBooks();
-    CaptureBook cb = new CaptureBook();
-
+    
+    Book newBook = new Book();
+    BookDAO bookDao = new BookDAO();
+    
     @Override
-
+    
     public void start(Stage primaryStage) {
         mainScene.getStylesheets().add(MyBookWishList.class.getResource("booksCSS.css").toExternalForm());
         secondScene.getStylesheets().add(MyBookWishList.class.getResource("booksCSS.css").toExternalForm());
@@ -65,22 +65,22 @@ public class MyBookWishList extends Application {
 
         //Radio Buttons
         RadioButton acquiredRB = new RadioButton();
-
+        
         setStyle(bookTitleText, bookAuthorText, bookAcquiredText,
                 dateAcquiredText, bookTitleInput, bookAuthorInput,
                 dateAcquiredInput, acquiredRB, addBookBtn, closeBtn, showListBtn,
                 backBtn);
-
+        
         setEvents(bookTitleInput, bookAuthorInput, dateAcquiredText,
                 dateAcquiredInput, acquiredRB, addBookBtn, closeBtn, showListBtn,
-                backBtn,primaryStage, mainScene, secondScene);
-
+                backBtn, primaryStage, mainScene, secondScene);
+        
         mainLayout.getChildren().addAll(bookTitleText, bookAuthorText,
                 bookAcquiredText, dateAcquiredText, bookTitleInput,
                 bookAuthorInput, dateAcquiredInput, acquiredRB, addBookBtn,
                 closeBtn, showListBtn);
         secondLayout.getChildren().addAll(backBtn);
-
+        
         primaryStage.setTitle("Book Wish List");
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
@@ -104,46 +104,46 @@ public class MyBookWishList extends Application {
             if (e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.TAB) {
                 bookAuthorInput.clear();
                 bookAuthorInput.requestFocus();
-
+                
             }
         });
-
+        
         bookTitleInput.setOnMouseClicked((MouseEvent e) -> {
             if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-
+                
                 bookTitleInput.clear();
                 bookAuthorInput.clear();
                 addBookBtn.setDisable(true);
-
+                
             }
-
+            
         });
-
+        
         bookTitleInput.setOnKeyTyped((KeyEvent e) -> {
             bookAuthorInput.clear();
             if (bookAuthorInput.getText().length() > 0) {
                 addBookBtn.setDisable(false);
             } else {
                 addBookBtn.setDisable(true);
-
+                
             }
-
+            
         });
         bookAuthorInput.setOnMouseClicked((MouseEvent e) -> {
             if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-
+                
                 bookAuthorInput.clear();
-
+                
             }
-
+            
         });
-
+        
         bookAuthorInput.setOnKeyTyped((KeyEvent e) -> {
             if (bookTitleInput.getText().length() > 0 && bookAuthorInput.getText().length() > 0) {
                 addBookBtn.setDisable(false);
             }
         });
-
+        
         acquiredRB.setOnAction((ActionEvent e) -> {
             {
                 if (acquiredRB.isSelected()) {
@@ -152,28 +152,28 @@ public class MyBookWishList extends Application {
                 } else {
                     dateAcquiredText.setVisible(false);
                     dateAcquiredInput.setVisible(false);
-
+                    
                 }
             }
-
+            
         });
         addBookBtn.setOnAction((ActionEvent e) -> {
             if (bookTitleInput.getText().length() > 0 && bookAuthorInput.getText().length() > 0) {
-                mb.setBook(bookTitleInput.getText());
-                mb.setAuthor(bookAuthorInput.getText());
-                System.out.println(mb.getBook());
-                System.out.println(mb.getAuthor());
-
+                newBook.setTitle(bookTitleInput.getText());
+                newBook.setAuthor(bookAuthorInput.getText());
+                System.out.println(newBook.getTitle());
+                System.out.println(newBook.getAuthor());
+                
                 if (acquiredRB.isSelected()) {
-                    mb.setAcquiredDate(dateAcquiredInput.getValue().toString());
-                    cb.AddBook(true, mb.getBook(), mb.getAuthor(), true, mb.getAcquiredDate());
+                    newBook.setAcquired(true);
+                    newBook.setAcquiredDate(dateAcquiredInput.getValue().toString());
+                    bookDao.AddBook(newBook);
                 } else {
-
-                    cb.AddBook(true, mb.getBook(), mb.getAuthor(), false, null);
-                }   
-
-            }
-            else {
+                    
+                    bookDao.AddBook(newBook);
+                }                
+                
+            } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText("Title and author required");
                 alert.show();
@@ -203,7 +203,7 @@ public class MyBookWishList extends Application {
         bookAuthorText.getStyleClass().add("customText");
         bookAcquiredText.getStyleClass().add("customAcquiredText");
         dateAcquiredText.getStyleClass().add("customAcquiredText");
-
+        
         bookTitleText.setLayoutY(40); //Title Y coordinate
         bookTitleText.setLayoutX(100);// Title X coordinate
 
@@ -220,7 +220,7 @@ public class MyBookWishList extends Application {
         bookTitleInput.getStyleClass().add("customText");
         bookAuthorInput.getStyleClass().add("customText");
         dateAcquiredInput.getStyleClass().add("customInputAcquiredText");
-
+        
         bookTitleInput.setLayoutY(50);//Book name input Y coordinate
         bookTitleInput.setLayoutX(100);//Book name inpute X coordinate
 
@@ -249,7 +249,7 @@ public class MyBookWishList extends Application {
         //RadioButton CSS
         acquiredRB.setLayoutY(110);
         acquiredRB.setLayoutX(230);
-
+        
     }
-
+    
 }
