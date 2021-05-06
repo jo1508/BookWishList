@@ -21,7 +21,7 @@ public class BookDAO {
     Database connectURL = Database.getDb();
 
     public void AddBook(Book book) {
-        connectURL.Connect(true);
+        connectURL.Connect(false);
 
         try {
             Connection newConnection

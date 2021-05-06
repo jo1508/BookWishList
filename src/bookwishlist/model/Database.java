@@ -36,7 +36,7 @@ public class Database {
                     + "databaseName=Java_Books;integratedSecurity=true";
 
         } else {
-
+            
             Scanner input = new Scanner(System.in);
             String host;
             String instance;

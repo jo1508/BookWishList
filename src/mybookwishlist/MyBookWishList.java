@@ -7,6 +7,7 @@ package mybookwishlist;
 
 import bookwishlist.model.Book;
 import bookwishlist.model.BookDAO;
+import bookwishlist.model.DAOFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -30,7 +31,7 @@ public class MyBookWishList extends Application {
     Scene secondScene = new Scene(secondLayout, 800, 600);
     
     Book newBook = new Book();
-    BookDAO bookDao = new BookDAO();
+    private BookDAO bookDao = DAOFactory.getBookDao();
     
     @Override
     
